@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+	Hello {{ session.username }}!<br />
+	We have the following files uploaded:<br >
+	<ul>
+	{% for file in files %}
+		<li><a href="{{ url_for('download', filename=file) }}">{{ file }}</a></li>
+	{% endfor %}
+	</ul>
+{% endblock %}

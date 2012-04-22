@@ -1,0 +1,33 @@
+<html>
+<head>
+	<script type="text/javascript" src="{{ url_for('static', filename='jquery-1.2.6.js') }}"></script>
+	<script type="text/javascript">
+		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }}
+
+		$(function() {
+			$('a#calculate').bind('click', function() {
+				$.getJSON(
+					$SCRIPT_ROOT + '/_add_numbers', 
+					{
+						a: $('input[name="a"]').val(),
+						b: $('input[name="b"]').val()
+					}, 
+					function(data) {
+						$("#result").text(data.result)
+					}
+				)
+				return false
+			})
+		})
+	</script>
+</head>
+<body>
+	<h1>jQuery Example</h1>
+	<p>
+		<input type="text" size=5 name="a"> +&nbsp;
+		<input type="text" size=5 name="b"> =&nbsp;
+		<span id="result">?</span>
+	<p>
+	<a href="#" id="calculate">Calculate</a>
+</body>
+</html>
